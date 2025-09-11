@@ -3,13 +3,9 @@ import json
 all_holes_info = []
 course_info = {}
 
-
-
 def serialize_save_to_file(course_name, course_info):
     with open(f"course_info_{course_name.lower()}.json", "w") as f:
         f.write(json.dumps(course_info))
-
-
 
 try:
     course_name = input("Course name: ")
