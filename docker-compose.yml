@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    container_name: discgolf_db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: kuk
+      POSTGRES_DB: discgolf_db
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  api:
+    build: ./api
+    container_name: discgolf_api
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: "postgresql://admin:kuk@db:5432/discgolf_db"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./api:/main
+
+volumes:
+  db_data:
