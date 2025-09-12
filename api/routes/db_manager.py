@@ -47,3 +47,21 @@ class DBManager:
 				conn.commit()
 		finally:
 			self.put_conn(conn)
+
+def init_tables(conn):
+
+	conn.execute("""
+	CREATE TABLE IF NOT EXISTS courses (
+		id SERIAL PRIMARY KEY,
+		name TEXT NOT NULL,
+		location TEXT NOT NULL
+	);
+	""")
+
+	conn.execute("""
+        CREATE TABLE IF NOT EXISTS holes (
+                id SERIAL PRIMARY KEY,
+                name TEXT NOT NULL,
+                location TEXT NOT NULL
+        );
+        """)
