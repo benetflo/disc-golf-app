@@ -83,3 +83,6 @@ if __name__ == "__main__":
 	from players import register_new_player
 	register_new_player(db, "Simon")
 	register_new_player(db, "Benjamin")
+
+	from courses import register_new_course
+	register_new_course(db, "Rudan", "Haninge")

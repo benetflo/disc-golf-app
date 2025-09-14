@@ -1,4 +1,4 @@
-import db_manager as db
+from db_manager import DBManager as db
 
 def register_new_player(db, name):
     db.execute(
