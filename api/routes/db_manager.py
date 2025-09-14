@@ -48,9 +48,12 @@ class DBManager:
 		finally:
 			self.put_conn(conn)
 
-def init_tables(conn):
+def init_tables(db: DBManager):
+	"""
+	initialises all tables for the database
+	"""
 
-	conn.execute("""
+	db.execute("""
 	CREATE TABLE IF NOT EXISTS courses (
 		id SERIAL PRIMARY KEY,
 		name TEXT NOT NULL,
@@ -58,10 +61,25 @@ def init_tables(conn):
 	);
 	""")
 
-	conn.execute("""
+	db.execute("""
         CREATE TABLE IF NOT EXISTS holes (
                 id SERIAL PRIMARY KEY,
                 name TEXT NOT NULL,
                 location TEXT NOT NULL
         );
         """)
+	
+	db.execute("""
+		CREATE TABLE IF NOT EXISTS players (
+				id SERIAL PRIMARY KEY,
+				name TEXT NOT NULL 
+		);	  
+		""")
+
+if __name__ == "__main__":
+	db = DBManager()
+	init_tables(db)
+
+	from players import register_new_player
+	register_new_player(db, "Simon")
+	register_new_player(db, "Benjamin")
