@@ -1,6 +1,6 @@
 import csv
 
-filename = "discs.csv"
+filename = "files/discs.csv"
 
 headers = ["manifacturer", "name", "type", "speed", "glide", "turn", "fade"]
 
@@ -49,4 +49,3 @@ while 1:
         exit()
     else:
         print("Invalid option!")
-    
