@@ -9,14 +9,14 @@ def register_new_course(db, name, location):
 		(name, location)
 	)
 
-def register_new_layout(db, name, holes_amount, description):
+def register_new_layout(db, course_id, name, holes_amount, description):
 	db.execute(
-		"INSERT INTO layouts (name, holes_amount, description) VALUES (%s, %s, %s);",
-		(name, holes_amount, description)
+		"INSERT INTO layouts (course_id, name, holes_amount, description) VALUES (%s, %s, %s, %s);",
+		(course_id, name, holes_amount, description)
 	)
 
-def register_new_hole(db, hole_num, par, distance, description):
+def register_new_hole(db, layout_id, hole_num, par, distance, description):
 	db.execute(
-		"INSERT INTO holes (hole_num, par, distance, description) VALUES (%s, %s, %s, %s);",
-		(hole_num, par, distance, description)
+		"INSERT INTO holes (layout_id, hole_num, par, distance, description) VALUES (%s, %s, %s, %s, %s);",
+		(layout_id, hole_num, par, distance, description)
 	)
