@@ -76,6 +76,21 @@ def init_tables(db: DBManager):
 		);	  
 		""")
 
+	db.execute("""
+		CREATE TABLE IF NOT EXISTS disc_molds (
+				id SERIAL PRIMARY KEY,
+				manifacturer TEXT NOT NULL 
+				name TEXT NOT NULL 
+				type TEXT NOT NULL 
+				speed TEXT NOT NULL 
+				glide TEXT NOT NULL 
+				turn TEXT NOT NULL 
+				fade TEXT NOT NULL 
+		);	  
+		""")
+
+
+
 if __name__ == "__main__":
 	db = DBManager()
 	init_tables(db)
