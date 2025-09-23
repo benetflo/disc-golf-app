@@ -42,7 +42,7 @@ while 1:
             answ = input("y/n?")
             if answ == "y" or answ == "Y":                
                 
-                df = pd.read_csv("files/discs.csv")
+                df = pd.read_csv(filename)
                 
                 if not ((df["manifacturer"] == manifacturer) & (df["name"] == disc_name)).any():
                       
@@ -51,8 +51,9 @@ while 1:
                         writer.writerow([manifacturer, disc_name, disc_type, speed, glide, turn, fade])
 
                     # SORT CSV
+                    df = pd.read_csv(filename)
                     df = df.sort_values(by=["manifacturer", "name"], ignore_index=True)
-                    df.to_csv("files/discs.csv", index=False)
+                    df.to_csv(filename, index=False)
 
                     break
                 else:
