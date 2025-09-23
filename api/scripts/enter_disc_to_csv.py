@@ -42,16 +42,21 @@ while 1:
             answ = input("y/n?")
             if answ == "y" or answ == "Y":                
                 
-                with open(filename, "a", newline="", encoding="utf-8") as f:
-                    writer = csv.writer(f)
-                    writer.writerow([manifacturer, disc_name, disc_type, speed, glide, turn, fade])
-
-                # SORT CSV
                 df = pd.read_csv("files/discs.csv")
-                df = df.sort_values(by=["manifacturer", "name"], ignore_index=True)
-                df.to_csv("files/discs.csv", index=False)
+                
+                if not ((df["manifacturer"] == manifacturer) & (df["name"] == disc_name)).any():
+                      
+                    with open(filename, "a", newline="", encoding="utf-8") as f:
+                        writer = csv.writer(f)
+                        writer.writerow([manifacturer, disc_name, disc_type, speed, glide, turn, fade])
 
-                break
+                    # SORT CSV
+                    df = df.sort_values(by=["manifacturer", "name"], ignore_index=True)
+                    df.to_csv("files/discs.csv", index=False)
+
+                    break
+                else:
+                    print("Disc already exists!!")
     elif option == "2":
         exit()
     else:
