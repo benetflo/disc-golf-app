@@ -1,4 +1,5 @@
 import csv
+import pandas as pd
 
 filename = "files/discs.csv"
 
@@ -44,6 +45,12 @@ while 1:
                 with open(filename, "a", newline="", encoding="utf-8") as f:
                     writer = csv.writer(f)
                     writer.writerow([manifacturer, disc_name, disc_type, speed, glide, turn, fade])
+
+                # SORT CSV
+                df = pd.read_csv("files/discs.csv")
+                df = df.sort_values(by=["manifacturer", "name"], ignore_index=True)
+                df.to_csv("files/discs.csv", index=False)
+
                 break
     elif option == "2":
         exit()
