@@ -35,6 +35,19 @@ class DBManager:
 				return cur.fetchall()
 		finally:
 			self.put_conn(conn)
+	
+	def fetch_one(self, query, params=None):
+		"""
+			Method to fetch one entry from a table
+		"""
+		conn = self.get_conn()
+
+		try:
+			with conn.cursor() as cur:
+				cur.execute(query, params or ())
+				return cur.fetchone()
+		finally:
+			self.put_conn(conn)
 
 	def execute(self, query, params="None"):
 		"""
