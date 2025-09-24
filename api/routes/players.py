@@ -1,7 +1,18 @@
-from db_manager import DBManager as db
+from routes.db_manager import DBManager as db
 
-def register_new_player(db, name):
-    db.execute(
-        "INSERT INTO players (name) VALUES (%s);",
-        (name,)  # kommatecknet är viktigt för att det ska vara en tuple
+def insert_new_player(db, name, username):
+    
+    row = db.fetch_one(
+        "SELECT username FROM players WHERE username = %s;",
+        (username,)
     )
+    
+    if row is None:
+
+        db.execute(
+            "INSERT INTO players (name, username) VALUES (%s, %s);",
+            (name, username)
+        )
+        return 0
+    
+    return 1

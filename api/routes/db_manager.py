@@ -107,7 +107,8 @@ def init_tables(db: DBManager):
 	db.execute("""
 		CREATE TABLE IF NOT EXISTS players (
 				id SERIAL PRIMARY KEY,
-				name TEXT NOT NULL
+				name TEXT NOT NULL,
+				username TEXT NOT NULL
 		);	  
 		""")
 
