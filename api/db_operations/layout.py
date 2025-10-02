@@ -1,4 +1,4 @@
-from db_operations.db_manager import DBManager as db
+from db_operations.db_manager import DBManager
 
 class Layout:
     

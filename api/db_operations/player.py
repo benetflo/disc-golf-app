@@ -1,11 +1,12 @@
-from db_operations.db_manager import DBManager as db
+from db_operations.db_manager import DBManager
 
 
 class Player:
 
-    def __init__(self, name: str, username: str):
+    def __init__(self, name: str, username: str, id=None):
         self._name = name
         self._username = username
+        self._id = id
 
     @property
     def username(self):

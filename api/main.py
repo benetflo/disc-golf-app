@@ -3,6 +3,8 @@ from fastapi import FastAPI
 import uvicorn
 from db_operations.db_manager import DBManager
 from db_operations.player import Player
+from db_operations.course import Course
+from db_operations.layout import Layout
 from db_operations.db_init_tables import init_tables
 
 
@@ -16,6 +18,10 @@ if __name__ == "__main__":
 	db = DBManager()
 	init_tables(db)
 
-	a = Player("Simon B", "Cuddlew")
+	a = Course("Rudan", "Stockholm")
+	a.insert_new_course(db)
+
+	b = Layout("Rudan", "Main", "Main layout 18 holes")
+	b.insert_new_layout(db)
 
 	uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
