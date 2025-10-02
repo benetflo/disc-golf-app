@@ -1,8 +1,10 @@
 from fastapi import FastAPI
 #import api.routes.db_manager as db
 import uvicorn
-from routes.db_manager import DBManager, init_tables
-from routes.db_course_info import insert_new_hole, insert_new_course, insert_new_layout
+from db_operations.db_manager import DBManager
+from db_operations.player import Player
+from db_operations.db_init_tables import init_tables
+
 
 app = FastAPI()
 
@@ -14,8 +16,6 @@ if __name__ == "__main__":
 	db = DBManager()
 	init_tables(db)
 
-	insert_new_course(db, "Rudan", "Stockholm - Haninge")
-	insert_new_layout(db, "Rudan", "Main", "Full 18 standard")
-	insert_new_hole(db, "Rudan", 85, 3, "Hole 1")
+	a = Player("Simon B", "Cuddlew")
 
 	uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

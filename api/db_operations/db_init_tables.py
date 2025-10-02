@@ -1,6 +1,6 @@
-# from routes.db_manager import DBManager as db
+from db_operations.db_manager import DBManager as db
 
-def init_tables(db: DBManager):
+def init_tables(db):
 	"""
 	initialises all tables for the database
 	"""
