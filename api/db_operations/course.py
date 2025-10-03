@@ -35,7 +35,7 @@ class Course:
     
         # fill empty class object with excisting info from player in database
     @classmethod 
-    def get_course_info_from_db(self, db: DBManager, name) -> dict:
+    def get_course_info_from_db(self, db: DBManager, name: str) -> dict:
 
         row = db.fetch_one(
             "SELECT * FROM courses WHERE name = %s;",

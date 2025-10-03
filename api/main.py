@@ -44,7 +44,7 @@ def get_layout_info(course_name: str, layout_name: str):
 
 @app.get("/holes_in_layouts/{course_name}/{layout_name}")
 def get_holes_in_layouts_info(course_name: str, layout_name: str):
-	holes_in_layout = Layout.get_holes_in_layout_from_db(course_name, layout_name)
+	holes_in_layout = Layout.get_holes_in_layout_from_db(db, course_name, layout_name)
 	
 	if holes_in_layout is None:
 		raise HTTPException(status_code=404, detail="Layout not found")

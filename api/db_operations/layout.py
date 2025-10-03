@@ -38,7 +38,7 @@ class Layout:
     
         # fill empty class object with excisting info from player in database
     @classmethod 
-    def get_layout_info_from_db(db: DBManager, course_name, layout_name) -> dict:
+    def get_layout_info_from_db(cls, db: DBManager, course_name, layout_name) -> dict:
 
         row = db.fetch_one(
             "SELECT id FROM courses WHERE name = %s;",
@@ -59,14 +59,14 @@ class Layout:
         return (None,)
     
     @classmethod
-    def get_holes_in_layout_from_db(self, db: DBManager, course_name, layout_name):
+    def get_holes_in_layout_from_db(cls, db: DBManager, course_name: str, layout_name:str) -> tuple:
 
-        layout_id = (self.get_layout_info_from_db(db, course_name, layout_name))[0]
+        layout_id = Layout.get_layout_info_from_db(db, course_name, layout_name)[0]
 
         if layout_id is not None:
 
             holes_in_layout = db.fetch_all(
-                "SELECT * FROM holes_in_layout WHERE layout_id = %s;",
+                "SELECT * FROM holes_in_layouts WHERE layout_id = %s;",
                 (layout_id,)
             )
             return holes_in_layout
