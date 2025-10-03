@@ -30,7 +30,7 @@ class DBManager:
 		"""
 		conn = self.get_conn()
 		try:
-			with conn.cursor as cur:
+			with conn.cursor() as cur:
 				cur.execute(query, params or ())
 				return cur.fetchall()
 		finally:
@@ -46,6 +46,21 @@ class DBManager:
 			with conn.cursor() as cur:
 				cur.execute(query, params or ())
 				return cur.fetchone()
+		finally:
+			self.put_conn(conn)
+
+	def execute_returning_id(self, query, params=None):
+    	
+		conn = self.get_conn()
+		
+		try:
+			with conn.cursor() as cur:
+				cur.execute(query, params or ())
+				result = None
+				if query.strip().upper().startswith("INSERT") and "RETURNING" in query.upper():
+					result = cur.fetchone()
+				conn.commit()
+				return result[0] if result else None
 		finally:
 			self.put_conn(conn)
 

@@ -15,7 +15,7 @@ class Course:
     def location(self):
         return self._location
 
-    def insert_new_course(self, db: DBManager):
+    def insert_new_course_to_db(self, db: DBManager) -> bool:
         
         # Check if course is already in DB
         row = db.fetch_one(
@@ -29,6 +29,17 @@ class Course:
                 "INSERT INTO courses (name, location) VALUES (%s, %s);",
                 (self._name, self._location)
             )
-            return 0
+            return True
         
-        return 1
+        return False
+    
+        # fill empty class object with excisting info from player in database
+    @classmethod 
+    def get_course_info_from_db(self, db: DBManager, name) -> dict:
+
+        row = db.fetch_one(
+            "SELECT * FROM courses WHERE name = %s;",
+            (name,)
+        )
+        return row
+        # add all info to class attributes not return row

@@ -33,7 +33,7 @@ def init_tables(db):
 		""")
 
 	db.execute("""
-        CREATE TABLE IF NOT EXISTS holes_in_layout (
+        CREATE TABLE IF NOT EXISTS holes_in_layouts (
 			id SERIAL PRIMARY KEY,
 			layout_id INT NOT NULL REFERENCES layouts(id) ON DELETE CASCADE,
 			hole_id INT NOT NULL REFERENCES holes(id) ON DELETE CASCADE,
@@ -71,6 +71,8 @@ def init_tables(db):
 		);	  
 		""")
 
+#################################################################################################
+
 	db.execute("""
 		CREATE TABLE IF NOT EXISTS disc_molds (
 				id SERIAL PRIMARY KEY,
@@ -102,7 +104,7 @@ def init_tables(db):
     		l.course_id,
     		SUM(h.par) AS total_par
 		FROM layouts l
-		JOIN holes_in_layout hil ON hil.layout_id = l.id
+		JOIN holes_in_layouts hil ON hil.layout_id = l.id
 		JOIN holes h ON h.id = hil.hole_id
 		GROUP BY l.id, l.name, l.description, l.course_id
 		ORDER BY l.id;

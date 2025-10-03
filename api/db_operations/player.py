@@ -16,7 +16,7 @@ class Player:
     def name(self):
         return self._name
 
-    def insert_player_to_db(self, db: DBManager):
+    def insert_player_to_db(self, db: DBManager) -> bool:
         
         row = db.fetch_one(
             "SELECT username FROM players WHERE username = %s;",
@@ -35,7 +35,7 @@ class Player:
     
     # fill empty class object with excisting info from player in database
     @classmethod 
-    def get_player_info(self, db: DBManager, username):
+    def get_player_info_from_db(self, db: DBManager, username) -> dict:
 
         row = db.fetch_one(
             "SELECT * FROM players WHERE username = %s;",
