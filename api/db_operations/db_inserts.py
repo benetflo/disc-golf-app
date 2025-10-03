@@ -3,22 +3,6 @@
 
 # COURSE, LAYOUT, HOLE FUNCTIONS
 
-def insert_new_hole(db, course_name, distance, par, description):
-	
-	row = db.fetch_one(
-		"SELECT id FROM courses WHERE name = %s;",
-		(course_name,)
-	)
-
-	if row is not None:
-		course_id = row[0]
-		db.execute(
-			"INSERT INTO holes (course_id, distance, par, description) VALUES (%s, %s, %s, %s);",
-			(course_id, distance, par, description)
-		)
-		return 0
-	
-	return 1
 
 def insert_discs_from_csv(db: DBManager):
     csv_path = '/main/scripts/files/discs.csv'
